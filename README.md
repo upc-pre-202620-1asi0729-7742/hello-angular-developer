@@ -19,15 +19,15 @@ This application showcases the following concepts:
 
 ## Prerequisites
 
-- Node.js (v20+ recommended)
-- npm (v21+ recommended)
+- Node.js (v22+ recommended)
+- npm (v10+ recommended)
 - Angular CLI (`npm install -g @angular/cli`)
 
 ## Class Diagram
 
 The following diagram illustrates the structure of the application, including the main components and their relationships:
 
-![class-diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/upc-pre-202520-1asi0729-sandbox/hello-angular-developer/refs/heads/master/docs/class-diagram.puml?token=GHSAT0AAAAAAC7JG2V4GCTXFPTM2BF2XXV6Z7ZZOUQ)
+![class-diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/upc-pre-202520-1asi0729-sandbox/hello-angular-developer/refs/heads/master/docs/class-diagram.puml?token=GHSAT0AAAAAADJGFNEZFVDJ4SPJQ7HUOMOY2F2NKBQ)
 
 Review the document [docs/class-diagram.md](docs/class-diagram.puml) for a detailed class diagram of the application.
 
