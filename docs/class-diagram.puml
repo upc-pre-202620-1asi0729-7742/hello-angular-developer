@@ -12,7 +12,7 @@ class Developer {
   +fullName: string
 }
 
-class AppComponent {
+class "«Component» App" as App {
   +title: string
   +firstName: string
   +lastName: string
@@ -20,7 +20,7 @@ class AppComponent {
   +resetRegisteredDeveloperInfo(): void
 }
 
-class RegisterDeveloperComponent {
+class "«Component» DeveloperRegistration" as DeveloperRegistration {
   +developerForm: FormGroup
   +developerRegistered: EventEmitter<{firstName: string, lastName: string}>
   +registrationDeferred: EventEmitter<void>
@@ -29,7 +29,7 @@ class RegisterDeveloperComponent {
   +clearFields(): void
 }
 
-class GreetDeveloperComponent {
+class "«Component» DeveloperGreeting" as DeveloperGreeting {
   +firstName: string
   +lastName: string
   +fullName: string
@@ -37,26 +37,26 @@ class GreetDeveloperComponent {
 }
 
 ' Relationships
-AppComponent o--> "1" RegisterDeveloperComponent : contains
-AppComponent o--> "1" GreetDeveloperComponent : contains
-RegisterDeveloperComponent --> AppComponent : emits developerRegistered
-RegisterDeveloperComponent --> AppComponent : emits later
-GreetDeveloperComponent --> "1" Developer : uses
+App o--> "1" DeveloperRegistration : contains
+App o--> "1" DeveloperGreeting : contains
+DeveloperRegistration --> App : emits developerRegistered
+DeveloperRegistration --> App : emits later
+DeveloperGreeting --> "1" Developer : uses
 
 ' Notes
 note right of Developer
   Entity in greetings/model
 end note
 
-note right of AppComponent
+note right of App
   Root component
 end note
 
-note right of RegisterDeveloperComponent
+note right of DeveloperRegistration
   Handles registration form
 end note
 
-note right of GreetDeveloperComponent
+note right of DeveloperGreeting
   Displays greeting
 end note
 
