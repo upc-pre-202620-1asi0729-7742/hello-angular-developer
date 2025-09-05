@@ -1,0 +1,12 @@
+/* Styles for the root component layout */
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Spacing below the registration form */
+app-register-developer {
+  margin-bottom: 20px;
+}
