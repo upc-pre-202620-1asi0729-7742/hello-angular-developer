@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Developer} from '../../domain/model/developer';
+import {Developer} from '../../../domain/model/developer';
 
 /**
  * Component for greeting a developer by name.

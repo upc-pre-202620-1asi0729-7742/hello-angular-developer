@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
-import {GreetDeveloper} from './greetings/presentation/greet-developer/greet-developer';
-import {RegisterDeveloper} from './greetings/presentation/register-developer/register-developer';
+import {GreetDeveloper} from './greetings/presentation/components/greet-developer/greet-developer';
+import {RegisterDeveloper} from './greetings/presentation/components/register-developer/register-developer';
 
 /**
  * The root application component.
