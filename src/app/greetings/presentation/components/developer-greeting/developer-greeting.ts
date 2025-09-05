@@ -8,12 +8,12 @@ import {Developer} from '../../../domain/model/developer';
  * Displays a personalized greeting if the developer's name is provided, otherwise defaults to 'Anonymous Developer'.
  */
 @Component({
-  selector: 'app-greet-developer',
+  selector: 'app-developer-greeting',
   imports: [],
-  templateUrl: './greet-developer.html',
-  styleUrl: './greet-developer.css'
+  templateUrl: './developer-greeting.html',
+  styleUrl: './developer-greeting.css'
 })
-export class GreetDeveloper {
+export class DeveloperGreeting {
   /**
    * The developer's first name to greet.
    */

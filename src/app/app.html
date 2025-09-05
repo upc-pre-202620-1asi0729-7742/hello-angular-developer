@@ -1,7 +1,7 @@
 <!-- Registration form component with event bindings -->
-<app-register-developer
+<app-developer-registration
   (developerRegistered)="updateRegisteredDeveloperInfo($event)"
   (registrationDeferred)="resetRegisteredDeveloperInfo()"/>
 
 <!-- Greeting component displaying the current developer state -->
-<app-greet-developer [firstName]="firstName" [lastName]="lastName"/>
+<app-developer-greeting [firstName]="firstName" [lastName]="lastName"/>

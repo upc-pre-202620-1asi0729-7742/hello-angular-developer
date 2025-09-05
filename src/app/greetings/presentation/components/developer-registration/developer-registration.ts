@@ -8,12 +8,12 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/
  * Provides a form for entering a developer's first and last name, with validation and event emission for registration actions.
  */
 @Component({
-  selector: 'app-register-developer',
+  selector: 'app-developer-registration',
   imports: [ReactiveFormsModule],
-  templateUrl: './register-developer.html',
-  styleUrl: './register-developer.css'
+  templateUrl: './developer-registration.html',
+  styleUrl: './developer-registration.css'
 })
-export class RegisterDeveloper {
+export class DeveloperRegistration {
   /**
    * Form group for developer registration with validation.
    * Requires firstName and lastName with a minimum length of 2.

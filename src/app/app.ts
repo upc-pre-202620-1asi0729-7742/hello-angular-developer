@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
-import {GreetDeveloper} from './greetings/presentation/components/greet-developer/greet-developer';
-import {RegisterDeveloper} from './greetings/presentation/components/register-developer/register-developer';
+import {DeveloperGreeting} from './greetings/presentation/components/developer-greeting/developer-greeting';
+import {DeveloperRegistration} from './greetings/presentation/components/developer-registration/developer-registration';
 
 /**
  * The root application component.
@@ -10,7 +10,7 @@ import {RegisterDeveloper} from './greetings/presentation/components/register-de
  */
 @Component({
   selector: 'app-root',
-  imports: [RegisterDeveloper, GreetDeveloper],
+  imports: [DeveloperRegistration, DeveloperGreeting],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
