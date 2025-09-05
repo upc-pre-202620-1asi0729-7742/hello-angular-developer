@@ -12,7 +12,7 @@ class Developer {
   +fullName: string
 }
 
-class "«Component» App" as App {
+class "«Component»\nApp" as App {
   +title: string
   +firstName: string
   +lastName: string
@@ -20,7 +20,7 @@ class "«Component» App" as App {
   +resetRegisteredDeveloperInfo(): void
 }
 
-class "«Component» DeveloperRegistration" as DeveloperRegistration {
+class "«Component»\n DeveloperRegistration" as DeveloperRegistration {
   +developerForm: FormGroup
   +developerRegistered: EventEmitter<{firstName: string, lastName: string}>
   +registrationDeferred: EventEmitter<void>
@@ -29,7 +29,7 @@ class "«Component» DeveloperRegistration" as DeveloperRegistration {
   +clearFields(): void
 }
 
-class "«Component» DeveloperGreeting" as DeveloperGreeting {
+class "«Component»\n DeveloperGreeting" as DeveloperGreeting {
   +firstName: string
   +lastName: string
   +fullName: string
