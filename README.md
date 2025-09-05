@@ -1,59 +1,52 @@
-# HelloAngularDeveloper
+# Hello Angular Developer (hello-angular-developer)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.2.
+## Overview
 
-## Development server
+This project is a simple application designed to introduce the main concepts and capabilities of the Angular Framework.
 
-To start a local development server, run:
+## Features
 
-```bash
-ng serve
-```
+It allows a visitor to register as a developer by entering their first and last names, demonstrating Angular core features through a practical greeting system within a domain-driven design structure.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+This application showcases the following concepts:
 
-## Code scaffolding
+- Standalone Components
+- Reactive Forms
+- Event Binding
+- Control Flow with `@if`
+- TypeScript Integration
+- Domain-Driven Design (DDD)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Prerequisites
 
-```bash
-ng generate component component-name
-```
+- Node.js (v20+ recommended)
+- npm (v21+ recommended)
+- Angular CLI (`npm install -g @angular/cli`)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Class Diagram
 
-```bash
-ng generate --help
-```
+The following diagram illustrates the structure of the application, including the main components and their relationships:
 
-## Building
+![class-diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/upc-pre-202520-1asi0729-sandbox/hello-angular-developer/refs/heads/master/docs/class-diagram.puml?token=GHSAT0AAAAAAC7JG2V4GCTXFPTM2BF2XXV6Z7ZZOUQ)
 
-To build the project run:
+Review the document [docs/class-diagram.md](docs/class-diagram.puml) for a detailed class diagram of the application.
 
-```bash
-ng build
-```
+## User Stories
+Refer to [docs/user-stories.md](docs/user-stories.md) for a list of user stories that outline the functionality and features of the application.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Setup
 
-## Running unit tests
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd hello-angular-developer
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+    ng serve
+    ```
+4. Open your browser and navigate to `http://localhost:4200/` to view the application.
