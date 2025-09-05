@@ -1,0 +1,10 @@
+/* Styles for the greeting paragraph */
+p {
+  font-size: 1.2em;
+  color: darkslategray; /* Dark text for readability */
+}
+
+/* Ensures the conditional span stays inline */
+span {
+  display: inline;
+}
