@@ -1,7 +1,10 @@
-import {Component, Input} from '@angular/core';
+import {Component, input, computed} from '@angular/core';
 import {Developer} from '../../../domain/model/developer';
 
 /**
+ * \component
+ * Stereotype: Component
+ *
  * Component for greeting a developer by name.
  *
  * @remarks
@@ -9,32 +12,35 @@ import {Developer} from '../../../domain/model/developer';
  */
 @Component({
   selector: 'app-developer-greeting',
-  imports: [],
+  standalone: true,
   templateUrl: './developer-greeting.html',
   styleUrl: './developer-greeting.css'
 })
 export class DeveloperGreeting {
   /**
    * The developer's first name to greet.
+   * @public
    */
-  @Input() firstName!: string;
+  firstName = input<string>('');
   /**
    * The developer's last name to greet.
+   * @public
    */
-  @Input() lastName!: string;
+  lastName = input<string>('');
 
   /**
    * Computes the full name of the developer or returns a default label if not provided.
    *
    * @returns The full name or 'Anonymous Developer'.
-   * @protected
+   * @public
    */
-  protected get fullName(): string {
-    if (!this.firstName && !this.lastName)
+  fullName = computed(() => {
+    if (!this.firstName() && !this.lastName()) {
       return 'Anonymous Developer';
-    let developer = new Developer(this.firstName, this.lastName);
+    }
+    const developer = new Developer(this.firstName(), this.lastName());
     return developer.fullName;
-  }
+  });
 
   /**
    * Indicates if the developer is considered registered (has at least one name field).
@@ -42,7 +48,5 @@ export class DeveloperGreeting {
    * @returns True if either first or last name is provided.
    * @public
    */
-  public get isRegistered(): boolean {
-    return !!this.firstName || !!this.lastName;
-  }
+  isRegistered = computed(() => !!this.firstName() || !!this.lastName());
 }
