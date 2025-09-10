@@ -1,28 +1,40 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Component, Output, EventEmitter, computed, signal, effect, Signal} from '@angular/core';
+import {FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 
 /**
- * Component for registering a developer.
+ * \component
+ * Stereotype: Component
+ *
+ * Component for registering a developer using Angular signals for form state and validation.
  *
  * @remarks
  * Provides a form for entering a developer's first and last name, with validation and event emission for registration actions.
  */
 @Component({
   selector: 'app-developer-registration',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './developer-registration.html',
   styleUrl: './developer-registration.css'
 })
 export class DeveloperRegistration {
   /**
-   * Form group for developer registration with validation.
-   * Requires firstName and lastName with a minimum length of 2.
+   * Signal for the developer's first name input.
    * @public
    */
-  public developerForm = new FormGroup({
-    firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    lastName: new FormControl('', [Validators.required, Validators.minLength(2)])
-  });
+  firstName = signal<string>('');
+  /**
+   * Signal for the developer's last name input.
+   * @public
+   */
+  lastName = signal<string>('');
+
+  /**
+   * Signal for the validity of the registration form.
+   * @public
+   */
+  isFormValid: Signal<boolean> = computed(() =>
+    this.firstName().trim().length >= 2 && this.lastName().trim().length >= 2
+  );
 
   /**
    * Event emitted when a developer is registered with valid input.
@@ -48,11 +60,12 @@ export class DeveloperRegistration {
    * @public
    */
   public submitRegistrationRequest(): void {
-    if (this.developerForm.valid) {
-      const firstName = this.developerForm.value.firstName ?? '';
-      const lastName = this.developerForm.value.lastName ?? '';
-      this.developerRegistered.emit({ firstName, lastName });
-      this.developerForm.reset();
+    if (this.isFormValid()) {
+      this.developerRegistered.emit({
+        firstName: this.firstName(),
+        lastName: this.lastName()
+      });
+      this.clearFields();
     }
   }
 
@@ -64,16 +77,17 @@ export class DeveloperRegistration {
    * @public
    */
   public deferRegistration(): void {
-    this.developerForm.reset();
+    this.clearFields();
     this.registrationDeferred.emit();
   }
 
   /**
-   * Handles the "Clear" action to reset the form.
+   * Handles the "Clear" action to reset the form fields.
    * Does not affect the current greeting state.
    * @public
    */
   public clearFields(): void {
-    this.developerForm.reset();
+    this.firstName.set('');
+    this.lastName.set('');
   }
 }
