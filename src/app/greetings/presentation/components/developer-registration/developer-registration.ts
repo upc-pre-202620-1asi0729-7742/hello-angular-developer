@@ -1,5 +1,5 @@
-import {Component, Output, EventEmitter, computed, signal, effect, Signal} from '@angular/core';
-import {FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Component, computed, EventEmitter, Output, signal, Signal} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 /**
  * \component

@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import {Component, signal} from '@angular/core';
 import {DeveloperGreeting} from './greetings/presentation/components/developer-greeting/developer-greeting';
 import {DeveloperRegistration} from './greetings/presentation/components/developer-registration/developer-registration';
 

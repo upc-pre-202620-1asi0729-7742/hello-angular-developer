@@ -4,7 +4,7 @@
  * @remarks
  * Ensures correct instantiation and behavior of the Developer class.
  */
-import { Developer } from './developer';
+import {Developer} from './developer';
 
 /**
  * Test suite for the Developer class.
