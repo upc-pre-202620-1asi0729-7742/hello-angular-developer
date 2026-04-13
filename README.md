@@ -27,7 +27,7 @@ This application showcases the following concepts:
 
 The following diagram illustrates the structure of the application, including the main components and their relationships:
 
-![class-diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/upc-pre-202520-1asi0729-sandbox/hello-angular-developer/refs/heads/master/docs/class-diagram.puml?token=GHSAT0AAAAAADJGFNEYWSKUX4WH232I4WRK2F27KTQ)
+![class-diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/upc-pre-202610-1asi0729-sandbox/hello-angular-developer/refs/heads/master/docs/class-diagram.puml?token=GHSAT0AAAAAADVFVJLAVN3NE7SARQTKBR2G2O4MDYA)
 
 Review the document [docs/class-diagram.puml](docs/class-diagram.puml) for a detailed class diagram of the application.
 
