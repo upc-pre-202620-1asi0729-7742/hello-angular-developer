@@ -29,7 +29,7 @@ The following diagram illustrates the structure of the application, including th
 
 ![class-diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/upc-pre-202520-1asi0729-sandbox/hello-angular-developer/refs/heads/master/docs/class-diagram.puml?token=GHSAT0AAAAAADJGFNEYWSKUX4WH232I4WRK2F27KTQ)
 
-Review the document [docs/class-diagram.md](docs/class-diagram.puml) for a detailed class diagram of the application.
+Review the document [docs/class-diagram.puml](docs/class-diagram.puml) for a detailed class diagram of the application.
 
 ## User Stories
 Refer to [docs/user-stories.md](docs/user-stories.md) for a list of user stories that outline the functionality and features of the application.
