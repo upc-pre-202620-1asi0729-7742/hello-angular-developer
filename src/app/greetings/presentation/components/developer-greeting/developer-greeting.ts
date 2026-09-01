@@ -1,4 +1,4 @@
-import {Component, computed, input} from '@angular/core';
+import {Component, computed, input, ChangeDetectionStrategy} from '@angular/core';
 import {Developer} from '../../../domain/model/developer';
 
 /**
@@ -14,6 +14,7 @@ import {Developer} from '../../../domain/model/developer';
   selector: 'app-developer-greeting',
   standalone: true,
   templateUrl: './developer-greeting.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './developer-greeting.css'
 })
 export class DeveloperGreeting {

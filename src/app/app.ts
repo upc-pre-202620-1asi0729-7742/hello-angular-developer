@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {Component, signal, ChangeDetectionStrategy} from '@angular/core';
 import {DeveloperGreeting} from './greetings/presentation/components/developer-greeting/developer-greeting';
 import {DeveloperRegistration} from './greetings/presentation/components/developer-registration/developer-registration';
 
@@ -12,6 +12,7 @@ import {DeveloperRegistration} from './greetings/presentation/components/develop
   selector: 'app-root',
   imports: [DeveloperRegistration, DeveloperGreeting],
   templateUrl: './app.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.css'
 })
 export class App {

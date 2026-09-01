@@ -1,4 +1,4 @@
-import {Component, computed, EventEmitter, Output, signal, Signal} from '@angular/core';
+import {Component, computed, EventEmitter, Output, signal, Signal, ChangeDetectionStrategy} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 /**
@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   selector: 'app-developer-registration',
   imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './developer-registration.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './developer-registration.css'
 })
 export class DeveloperRegistration {
