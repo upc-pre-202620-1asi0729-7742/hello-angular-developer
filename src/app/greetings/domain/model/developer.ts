@@ -5,16 +5,8 @@
  * This class is used to encapsulate developer identity information in the Greetings bounded context.
  */
 export class Developer {
-  /**
-   * The developer's first name.
-   * @readonly
-   */
-  private readonly _firstName: string;
-  /**
-   * The developer's last name.
-   * @readonly
-   */
-  private readonly _lastName: string;
+  readonly #firstName: string;
+  readonly #lastName: string;
 
   /**
    * Creates a new Developer instance.
@@ -22,8 +14,8 @@ export class Developer {
    * @param lastName - The developer's last name.
    */
   constructor(firstName: string, lastName: string) {
-    this._firstName = firstName;
-    this._lastName = lastName;
+    this.#firstName = firstName;
+    this.#lastName = lastName;
   }
 
   /**
@@ -31,6 +23,6 @@ export class Developer {
    * @returns The concatenated first and last name, trimmed.
    */
   get fullName(): string {
-    return `${this._firstName} ${this._lastName}`.trim();
+    return `${this.#firstName} ${this.#lastName}`.trim();
   }
 }
