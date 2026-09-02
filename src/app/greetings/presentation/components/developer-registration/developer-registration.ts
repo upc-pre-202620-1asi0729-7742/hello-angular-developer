@@ -1,5 +1,13 @@
-import {Component, computed, EventEmitter, Output, signal, Signal, ChangeDetectionStrategy} from '@angular/core';
+import {Component, computed, output, signal, Signal, ChangeDetectionStrategy} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
+/**
+ * Represents the data payload for a developer registration.
+ */
+export interface RegistrationPayload {
+  firstName: string;
+  lastName: string;
+}
 
 /**
  * \component
@@ -20,20 +28,20 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 export class DeveloperRegistration {
   /**
    * Signal for the developer's first name input.
-   * @public
+   * @protected
    */
-  firstName = signal<string>('');
+  protected firstName = signal<string>('');
   /**
    * Signal for the developer's last name input.
-   * @public
+   * @protected
    */
-  lastName = signal<string>('');
+  protected lastName = signal<string>('');
 
   /**
    * Signal for the validity of the registration form.
-   * @public
+   * @protected
    */
-  isFormValid: Signal<boolean> = computed(() =>
+  protected isFormValid: Signal<boolean> = computed(() =>
     this.firstName().trim().length >= 2 && this.lastName().trim().length >= 2
   );
 
@@ -43,7 +51,7 @@ export class DeveloperRegistration {
    * @event
    * @public
    */
-  @Output() public developerRegistered = new EventEmitter<{ firstName: string, lastName: string }>();
+  public developerRegistered = output<RegistrationPayload>();
 
   /**
    * Event emitted when the user chooses to defer registration.
@@ -51,16 +59,16 @@ export class DeveloperRegistration {
    * @event
    * @public
    */
-  @Output() public registrationDeferred = new EventEmitter<void>();
+  public registrationDeferred = output<void>();
 
   /**
    * Handles form submission to register a developer.
    * Emits the developerRegistered event with form values if valid.
    *
    * @returns void
-   * @public
+   * @protected
    */
-  public submitRegistrationRequest(): void {
+  protected submitRegistrationRequest(): void {
     if (this.isFormValid()) {
       this.developerRegistered.emit({
         firstName: this.firstName(),
@@ -75,9 +83,9 @@ export class DeveloperRegistration {
    * Resets the form and emits the registrationDeferred event.
    *
    * @returns void
-   * @public
+   * @protected
    */
-  public deferRegistration(): void {
+  protected deferRegistration(): void {
     this.clearFields();
     this.registrationDeferred.emit();
   }
@@ -85,9 +93,9 @@ export class DeveloperRegistration {
   /**
    * Handles the "Clear" action to reset the form fields.
    * Does not affect the current greeting state.
-   * @public
+   * @protected
    */
-  public clearFields(): void {
+  protected clearFields(): void {
     this.firstName.set('');
     this.lastName.set('');
   }
