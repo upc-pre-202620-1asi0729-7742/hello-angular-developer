@@ -1,6 +1,9 @@
 import {Component, signal, ChangeDetectionStrategy} from '@angular/core';
 import {DeveloperGreeting} from './greetings/presentation/components/developer-greeting/developer-greeting';
-import {DeveloperRegistration} from './greetings/presentation/components/developer-registration/developer-registration';
+import {
+  DeveloperRegistration,
+  RegistrationPayload
+} from './greetings/presentation/components/developer-registration/developer-registration';
 
 /**
  * The root application component.
@@ -24,24 +27,24 @@ export class App {
 
   /**
    * First name of the registered developer, empty if anonymous.
-   * @public
+   * @protected
    */
-  public firstName: string = '';
+  protected firstName: string = '';
 
   /**
    * Last name of the registered developer, empty if anonymous.
-   * @public
+   * @protected
    */
-  public lastName: string = '';
+  protected lastName: string = '';
 
   /**
    * Handles the developer registration event.
    * Updates the firstName and lastName properties with the registered values.
    *
    * @param developer - Object containing firstName and lastName.
-   * @public
+   * @protected
    */
-  public updateRegisteredDeveloperInfo(developer: { firstName: string, lastName: string }): void {
+  protected updateRegisteredDeveloperInfo(developer: RegistrationPayload): void {
     this.firstName = developer.firstName;
     this.lastName = developer.lastName;
   }
@@ -49,9 +52,9 @@ export class App {
   /**
    * Handles the "Later" action to defer registration.
    * Resets firstName and lastName to empty, reverting to anonymous state.
-   * @public
+   * @protected
    */
-  public resetRegisteredDeveloperInfo(): void {
+  protected resetRegisteredDeveloperInfo(): void {
     this.firstName = '';
     this.lastName = '';
   }
