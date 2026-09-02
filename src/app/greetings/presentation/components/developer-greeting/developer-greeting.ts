@@ -20,12 +20,12 @@ import {Developer} from '../../../domain/model/developer';
 export class DeveloperGreeting {
   /**
    * The developer's first name to greet.
-   * @public
+   * @protected
    */
   firstName = input<string>('');
   /**
    * The developer's last name to greet.
-   * @public
+   * @protected
    */
   lastName = input<string>('');
 
@@ -33,9 +33,9 @@ export class DeveloperGreeting {
    * Computes the full name of the developer or returns a default label if not provided.
    *
    * @returns The full name or 'Anonymous Developer'.
-   * @public
+   * @protected
    */
-  fullName = computed(() => {
+  protected fullName = computed(() => {
     if (!this.firstName() && !this.lastName()) {
       return 'Anonymous Developer';
     }
@@ -46,8 +46,8 @@ export class DeveloperGreeting {
   /**
    * Indicates if the developer is considered registered (has at least one name field).
    *
-   * @returns True if either first or last name is provided.
-   * @public
+   * @returns True if either the first or last name is provided.
+   * @protected
    */
-  isRegistered = computed(() => !!this.firstName() || !!this.lastName());
+  protected isRegistered = computed(() => !!this.firstName() || !!this.lastName());
 }
