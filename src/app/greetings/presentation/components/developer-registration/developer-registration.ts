@@ -1,48 +1,58 @@
 import {Component, computed, output, signal, Signal, ChangeDetectionStrategy} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Developer} from '../../../domain/model/developer';
 
 /**
- * Represents the data payload for a developer registration.
- */
-export interface RegistrationPayload {
-  firstName: string;
-  lastName: string;
-}
-
-/**
- * \component
- * Stereotype: Component
+ * Stereotype: Entry Point / Input Adapter Component
  *
  * Component for registering a developer using Angular signals for form state and validation.
  *
  * @remarks
- * Provides a form for entering a developer's first and last name, with validation and event emission for registration actions.
+ * Acts as the entry point for developer data collection. It manages local form state
+ * and emits a `Developer` domain entity once registration invariants are met.
  */
 @Component({
   selector: 'app-developer-registration',
   imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './developer-registration.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './developer-registration.css'
 })
 export class DeveloperRegistration {
+  static readonly EMPTY_NAME = '';
   /**
    * Signal for the developer's first name input.
    * @protected
    */
-  protected firstName = signal<string>('');
+  protected firstName = signal<string>(DeveloperRegistration.EMPTY_NAME);
   /**
    * Signal for the developer's last name input.
    * @protected
    */
-  protected lastName = signal<string>('');
+  protected lastName = signal<string>(DeveloperRegistration.EMPTY_NAME);
 
   /**
    * Signal for the validity of the registration form.
    * @protected
    */
   protected isFormValid: Signal<boolean> = computed(() =>
-    this.firstName().trim().length >= 2 && this.lastName().trim().length >= 2
+    Developer.isValidForRegistration(this.firstName(), this.lastName())
+  );
+
+  /**
+   * Validation for first name.
+   * @protected
+   */
+  protected isFirstNameValid = computed(() =>
+    this.firstName().trim().length === 0 || Developer.isValidName(this.firstName())
+  );
+
+  /**
+   * Validation for last name.
+   * @protected
+   */
+  protected isLastNameValid = computed(() =>
+    this.lastName().trim().length === 0 || Developer.isValidName(this.lastName())
   );
 
   /**
@@ -51,7 +61,7 @@ export class DeveloperRegistration {
    * @event
    * @public
    */
-  public developerRegistered = output<RegistrationPayload>();
+  public developerRegistered = output<Developer>();
 
   /**
    * Event emitted when the user chooses to defer registration.
@@ -63,17 +73,17 @@ export class DeveloperRegistration {
 
   /**
    * Handles form submission to register a developer.
-   * Emits the developerRegistered event with form values if valid.
+   * Emits the developerRegistered event with a Developer instance if valid.
    *
    * @returns void
    * @protected
    */
   protected submitRegistrationRequest(): void {
     if (this.isFormValid()) {
-      this.developerRegistered.emit({
-        firstName: this.firstName(),
-        lastName: this.lastName()
-      });
+      this.developerRegistered.emit(new Developer(
+        this.firstName(),
+        this.lastName()
+      ));
       this.clearFields();
     }
   }
@@ -96,7 +106,7 @@ export class DeveloperRegistration {
    * @protected
    */
   protected clearFields(): void {
-    this.firstName.set('');
-    this.lastName.set('');
+    this.firstName.set(DeveloperRegistration.EMPTY_NAME);
+    this.lastName.set(DeveloperRegistration.EMPTY_NAME);
   }
 }
