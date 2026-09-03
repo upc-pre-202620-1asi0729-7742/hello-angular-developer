@@ -2,51 +2,50 @@
 
 ## Overview
 
-This project is a simple application designed to introduce the main concepts and capabilities of the Angular Framework.
+This project is an application designed to introduce modern Angular v22 concepts and capabilities with Domain-Driven Design (DDD) principles. It demonstrates the use of Standalone Components, Signals, and a layered architecture organized by Bounded Contexts.
 
-## Features
+## Key Features
 
-It allows a visitor to register as a developer by entering their first and last names, demonstrating Angular core features through a practical greeting system within a domain-driven design structure.
+- **Angular v22 Integration**: Leverages Standalone Components, Signals, and the latest control flow.
+- **Domain-Driven Design (DDD)**: Implements a layered architecture with clearly defined Bounded Contexts.
+- **Signal-Based Reactivity**: Utilizes Angular Signals for state management and reactive data flow.
+- **Time-Ordered Identity**: Implements UUIDv7 for domain entity identity within the Shared Kernel.
+- **Strict TypeScript**: Ensures type safety across domain and presentation layers.
 
-This application showcases the following concepts:
+## Architecture & Design
 
-- Standalone Components
-- Reactive Forms
-- Event Binding
-- Control Flow with `@if`
-- TypeScript Integration
-- Domain-Driven Design (DDD)
+The application follows Domain-Driven Design principles, organized into two main Bounded Contexts:
+
+1.  **Greetings Bounded Context**: The core business domain responsible for developer registration and greeting logic.
+    - **Domain Layer**: Encapsulates business rules and invariants in the `Developer` entity.
+    - **Presentation Layer**: Orchestrates user interaction using Signal-based components.
+2.  **Shared Kernel Bounded Context**: Provides infrastructure-agnostic utilities, such as identity generation, shared across the system.
+
+## Documentation
+
+- **Architecture Decision Records (ADRs)**: Refer to [docs/adrs.md](docs/adrs.md) for detailed records of architectural choices.
+- **User Stories & RTM**: See [docs/user-stories.md](docs/user-stories.md) for functional requirements and the Requirements Traceability Matrix.
+- **Class Diagram**: Review [docs/class-diagram.puml](docs/class-diagram.puml) for a structural overview of the system.
+- **Changelog**: See [CHANGELOG.md](CHANGELOG.md) for a history of all notable changes.
 
 ## Prerequisites
 
-- Node.js (v22+ recommended)
-- npm (v10+ recommended)
-- Angular CLI (`npm install -g @angular/cli`)
+- **Node.js**: v22.0.0 or higher
+- **npm**: v10.0.0 or higher
+- **Angular CLI**: `npm install -g @angular/cli`
 
-## Class Diagram
+## Setup & Execution
 
-The following diagram illustrates the structure of the application, including the main components and their relationships:
-
-![class-diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/upc-pre-202610-1asi0729-sandbox/hello-angular-developer/refs/heads/master/docs/class-diagram.puml?token=GHSAT0AAAAAADVFVJLAVN3NE7SARQTKBR2G2O4MDYA)
-
-Review the document [docs/class-diagram.puml](docs/class-diagram.puml) for a detailed class diagram of the application.
-
-## User Stories
-Refer to [docs/user-stories.md](docs/user-stories.md) for a list of user stories that outline the functionality and features of the application.
-
-## Setup
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd hello-angular-developer
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
+1.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
+2.  **Start the development server**:
+    ```bash
     ng serve
     ```
-4. Open your browser and navigate to `http://localhost:4200/` to view the application.
+3.  **Run tests**:
+    ```bash
+    npm test
+    ```
+4.  **Access the application**: Navigate to `http://localhost:4200/` in your browser.

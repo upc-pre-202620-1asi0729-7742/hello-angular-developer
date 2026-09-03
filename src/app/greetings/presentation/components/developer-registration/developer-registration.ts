@@ -1,39 +1,58 @@
-import {Component, computed, EventEmitter, Output, signal, Signal} from '@angular/core';
+import {Component, computed, output, signal, Signal, ChangeDetectionStrategy} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Developer} from '../../../domain/model/developer';
 
 /**
- * \component
- * Stereotype: Component
+ * Stereotype: Entry Point / Input Adapter Component
  *
  * Component for registering a developer using Angular signals for form state and validation.
  *
  * @remarks
- * Provides a form for entering a developer's first and last name, with validation and event emission for registration actions.
+ * Acts as the entry point for developer data collection. It manages local form state
+ * and emits a `Developer` domain entity once registration invariants are met.
  */
 @Component({
   selector: 'app-developer-registration',
   imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './developer-registration.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './developer-registration.css'
 })
 export class DeveloperRegistration {
+  static readonly EMPTY_NAME = '';
   /**
    * Signal for the developer's first name input.
-   * @public
+   * @protected
    */
-  firstName = signal<string>('');
+  protected firstName = signal<string>(DeveloperRegistration.EMPTY_NAME);
   /**
    * Signal for the developer's last name input.
-   * @public
+   * @protected
    */
-  lastName = signal<string>('');
+  protected lastName = signal<string>(DeveloperRegistration.EMPTY_NAME);
 
   /**
    * Signal for the validity of the registration form.
-   * @public
+   * @protected
    */
-  isFormValid: Signal<boolean> = computed(() =>
-    this.firstName().trim().length >= 2 && this.lastName().trim().length >= 2
+  protected isFormValid: Signal<boolean> = computed(() =>
+    Developer.isValidForRegistration(this.firstName(), this.lastName())
+  );
+
+  /**
+   * Validation for first name.
+   * @protected
+   */
+  protected isFirstNameValid = computed(() =>
+    this.firstName().trim().length === 0 || Developer.isValidName(this.firstName())
+  );
+
+  /**
+   * Validation for last name.
+   * @protected
+   */
+  protected isLastNameValid = computed(() =>
+    this.lastName().trim().length === 0 || Developer.isValidName(this.lastName())
   );
 
   /**
@@ -42,7 +61,7 @@ export class DeveloperRegistration {
    * @event
    * @public
    */
-  @Output() public developerRegistered = new EventEmitter<{ firstName: string, lastName: string }>();
+  public developerRegistered = output<Developer>();
 
   /**
    * Event emitted when the user chooses to defer registration.
@@ -50,21 +69,21 @@ export class DeveloperRegistration {
    * @event
    * @public
    */
-  @Output() public registrationDeferred = new EventEmitter<void>();
+  public registrationDeferred = output<void>();
 
   /**
    * Handles form submission to register a developer.
-   * Emits the developerRegistered event with form values if valid.
+   * Emits the developerRegistered event with a Developer instance if valid.
    *
    * @returns void
-   * @public
+   * @protected
    */
-  public submitRegistrationRequest(): void {
+  protected submitRegistrationRequest(): void {
     if (this.isFormValid()) {
-      this.developerRegistered.emit({
-        firstName: this.firstName(),
-        lastName: this.lastName()
-      });
+      this.developerRegistered.emit(new Developer(
+        this.firstName(),
+        this.lastName()
+      ));
       this.clearFields();
     }
   }
@@ -74,9 +93,9 @@ export class DeveloperRegistration {
    * Resets the form and emits the registrationDeferred event.
    *
    * @returns void
-   * @public
+   * @protected
    */
-  public deferRegistration(): void {
+  protected deferRegistration(): void {
     this.clearFields();
     this.registrationDeferred.emit();
   }
@@ -84,10 +103,10 @@ export class DeveloperRegistration {
   /**
    * Handles the "Clear" action to reset the form fields.
    * Does not affect the current greeting state.
-   * @public
+   * @protected
    */
-  public clearFields(): void {
-    this.firstName.set('');
-    this.lastName.set('');
+  protected clearFields(): void {
+    this.firstName.set(DeveloperRegistration.EMPTY_NAME);
+    this.lastName.set(DeveloperRegistration.EMPTY_NAME);
   }
 }
