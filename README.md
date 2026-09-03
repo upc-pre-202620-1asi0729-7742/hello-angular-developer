@@ -26,6 +26,7 @@ The application follows Domain-Driven Design principles, organized into two main
 - **Architecture Decision Records (ADRs)**: Refer to [docs/adrs.md](docs/adrs.md) for detailed records of architectural choices.
 - **User Stories & RTM**: See [docs/user-stories.md](docs/user-stories.md) for functional requirements and the Requirements Traceability Matrix.
 - **Class Diagram**: Review [docs/class-diagram.puml](docs/class-diagram.puml) for a structural overview of the system.
+- **Changelog**: See [CHANGELOG.md](CHANGELOG.md) for a history of all notable changes.
 
 ## Prerequisites
 
