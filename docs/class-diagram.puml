@@ -1,63 +1,82 @@
 @startuml
 ' Class Diagram for Hello Angular Developer
+' Organized by bounded contexts and shared components
 
-' Skin parameters for a cleaner look
 skinparam monochrome true
 skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
 
-' Entities and Components
-class Developer {
-  -_firstName: string
-  -_lastName: string
-  +fullName: string
+package "Application Shell" {
+  class "«Component»\nApp" as App {
+    #title: Signal<string>
+    #registeredDeveloper: Signal<Developer>
+    #updateRegisteredDeveloperInfo(developer: Developer): void
+    #resetRegisteredDeveloperInfo(): void
+  }
 }
 
-class "«Component»\nApp" as App {
-  +title: string
-  +firstName: string
-  +lastName: string
-  +updateRegisteredDeveloperInfo(developer: {firstName: string, lastName: string}): void
-  +resetRegisteredDeveloperInfo(): void
+package "Greetings Bounded Context" <<Rectangle>> {
+  package "greetings.domain.model" {
+    class Developer {
+      -#id: string | null
+      -#firstName: string
+      -#lastName: string
+      +id: string | null
+      +firstName: string
+      +lastName: string
+      +fullName: string
+      +isRegistered: boolean
+      {static} +isValidName(name: string): boolean
+      {static} +isValidForRegistration(firstName: string, lastName: string): boolean
+      +equals(other: Developer): boolean
+    }
+  }
+
+  package "greetings.presentation.components" {
+    class "«Component»\nDeveloperRegistration" as DeveloperRegistration {
+      #firstName: Signal<string>
+      #lastName: Signal<string>
+      #isFormValid: Signal<boolean>
+      #isFirstNameValid: Signal<boolean>
+      #isLastNameValid: Signal<boolean>
+      +developerRegistered: Output<Developer>
+      +registrationDeferred: Output<void>
+      #submitRegistrationRequest(): void
+      #deferRegistration(): void
+      #clearFields(): void
+    }
+
+    class "«Component»\nDeveloperGreeting" as DeveloperGreeting {
+      +developer: Input<Developer>
+      #fullName: Signal<string>
+      #developerIsRegistered: Signal<boolean>
+      #developerId: Signal<string | null>
+    }
+  }
 }
 
-class "«Component»\n DeveloperRegistration" as DeveloperRegistration {
-  +developerForm: FormGroup
-  +developerRegistered: EventEmitter<{firstName: string, lastName: string}>
-  +registrationDeferred: EventEmitter<void>
-  +submitRegistrationRequest(): void
-  +deferRegistration(): void
-  +clearFields(): void
-}
-
-class "«Component»\n DeveloperGreeting" as DeveloperGreeting {
-  +firstName: string
-  +lastName: string
-  +fullName: string
-  +isRegistered: boolean
+package "Shared Kernel" {
+  class "generateUuid()" as GenerateUuid {
+    +generateUuid(): string
+  }
 }
 
 ' Relationships
 App o--> "1" DeveloperRegistration : contains
 App o--> "1" DeveloperGreeting : contains
-DeveloperRegistration --> App : emits developerRegistered
-DeveloperRegistration --> App : emits later
-DeveloperGreeting --> "1" Developer : uses
+DeveloperRegistration ..> App : emits developerRegistered
+DeveloperRegistration ..> App : emits registrationDeferred
+DeveloperRegistration ..> Developer : creates and validates
+DeveloperGreeting ..> Developer : reads
+Developer ..> GenerateUuid : uses
+App ..> Developer : manages state
 
-' Notes
 note right of Developer
-  Entity in greetings/model
+  Domain entity for the Greetings context
 end note
 
-note right of App
-  Root component
-end note
-
-note right of DeveloperRegistration
-  Handles registration form
-end note
-
-note right of DeveloperGreeting
-  Displays greeting
+note bottom of App
+  App shell orchestrating the bounded context
 end note
 
 @enduml
