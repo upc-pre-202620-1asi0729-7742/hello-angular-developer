@@ -1,21 +1,23 @@
 import {Component, signal, ChangeDetectionStrategy} from '@angular/core';
 import {DeveloperGreeting} from './greetings/presentation/components/developer-greeting/developer-greeting';
 import {
-  DeveloperRegistration,
-  RegistrationPayload
+  DeveloperRegistration
 } from './greetings/presentation/components/developer-registration/developer-registration';
+import {Developer} from './greetings/domain/model/developer';
 
 /**
- * The root application component.
+ * The root application component acting as an **Application Orchestrator**.
  *
  * @remarks
- * Hosts the registration and greeting components, manages the state of the currently registered developer, and handles registration events.
+ * Coordinates the interaction between the `DeveloperRegistration` (Entry Point) and
+ * `DeveloperGreeting` (Presenter) within the Greetings bounded context.
+ * It manages the reactive state of the currently registered developer using signals.
  */
 @Component({
   selector: 'app-root',
   imports: [DeveloperRegistration, DeveloperGreeting],
   templateUrl: './app.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './app.css'
 })
 export class App {
@@ -26,36 +28,28 @@ export class App {
   protected readonly title = signal('hello-angular-developer');
 
   /**
-   * First name of the registered developer, empty if anonymous.
+   * The registered developer entity.
    * @protected
    */
-  protected firstName: string = '';
-
-  /**
-   * Last name of the registered developer, empty if anonymous.
-   * @protected
-   */
-  protected lastName: string = '';
+  protected registeredDeveloper = signal<Developer>(Developer.DEFAULT_DEVELOPER);
 
   /**
    * Handles the developer registration event.
-   * Updates the firstName and lastName properties with the registered values.
+   * Updates the registeredDeveloper signal with the new entity.
    *
-   * @param developer - Object containing firstName and lastName.
+   * @param developer - The registered Developer entity.
    * @protected
    */
-  protected updateRegisteredDeveloperInfo(developer: RegistrationPayload): void {
-    this.firstName = developer.firstName;
-    this.lastName = developer.lastName;
+  protected updateRegisteredDeveloperInfo(developer: Developer): void {
+    this.registeredDeveloper.set(developer);
   }
 
   /**
    * Handles the "Later" action to defer registration.
-   * Resets firstName and lastName to empty, reverting to anonymous state.
+   * Resets registeredDeveloper to an anonymous state.
    * @protected
    */
   protected resetRegisteredDeveloperInfo(): void {
-    this.firstName = '';
-    this.lastName = '';
+    this.registeredDeveloper.set(Developer.DEFAULT_DEVELOPER);
   }
 }
