@@ -27,6 +27,7 @@ The application follows Domain-Driven Design principles, organized into two main
 - **User Stories & RTM**: See [docs/user-stories.md](docs/user-stories.md) for functional requirements and the Requirements Traceability Matrix.
 - **Class Diagram**: Review [docs/class-diagram.puml](docs/class-diagram.puml) for a structural overview of the system.
 - **Changelog**: See [CHANGELOG.md](CHANGELOG.md) for a history of all notable changes.
+- **Contributing**: Check [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to this project.
 
 ## Prerequisites
 
